@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+datasource db {
+  provider = "postgresql"
+}
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique @db.VarChar(50)
+  fullName     String   @db.VarChar(100)
+  passwordHash String   @db.VarChar(255)
+  role         String   @default("CUSTOMER") @db.VarChar(20)
+  score        Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+model ProcessedEvent {
+  eventId     String   @id
+  processedAt DateTime @default(now())
+}
